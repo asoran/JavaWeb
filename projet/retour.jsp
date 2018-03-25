@@ -3,6 +3,7 @@
 <%@ page import = "java.util.List" %>
 <%@ include file="header.jsp"%>
 <%
+
 	if(Status.isOpen() && session.getAttribute("user") != null){
 		//Doc mdr = (Livre)request.getSession(true).getAttribute("doc");
 		Utilisateur u = (Utilisateur)session.getAttribute("user");
@@ -15,7 +16,7 @@
 		out.println(a);
 
 		for(Document b : a){
-			if(((Doc)b).getTaken() == 0){
+			if(((Doc)b).getTaken() == u.getId()){
 		%>
 			<hr>
 			<img src="<%= ((Doc)b).getType() %>.png" width='16px' height='16px' />
@@ -23,7 +24,7 @@
 			<%
 			Object[] c = ((Doc)b).affiche();
 			%>
-			<a href="service.jsp?action=emprunt&id=<%= ((Doc)b).getId() %>">Emprunter</a>
+			<a href="service.jsp?action=retour&id=<%= ((Doc)b).getId() %>">Retour</a>
 			<ul>
 			<li><%= c[0] %></li>
 			<li><%= c[1] %></li>

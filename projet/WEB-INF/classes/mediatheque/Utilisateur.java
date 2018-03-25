@@ -13,6 +13,18 @@ public class Utilisateur {
 		this.type = type;
 	}
 	
+	public String getNom(){
+		return nom;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public String getType(){
+		return type;
+	}
+	
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", type=" + type + "]";

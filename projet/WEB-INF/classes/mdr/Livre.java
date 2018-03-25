@@ -7,8 +7,8 @@ import mediatheque.Utilisateur;
 
 public class Livre extends Doc {
 
-	public Livre(String titre, String auteur) {
-		super(titre, auteur);
+	public Livre(int id, String titre, String auteur, int taken) {
+		super(id, titre, auteur, taken);
 	}
 	
 	public String editeur = "Galimard";
@@ -20,6 +20,8 @@ public class Livre extends Doc {
 		return  new Object[]{
 				titre,
 				auteur,
+				"taken",
+				taken,
 				"editeur",
 				editeur,
 				"dateParution",

@@ -5,11 +5,16 @@ import mediatheque.Utilisateur;
 
 public abstract class Doc implements Document {
 
-	String titre, auteur;
+	private int id;
+	protected String titre;
+	protected String auteur;
+	protected int taken;
 	
-	public Doc(String titre, String auteur){
+	public Doc(int id, String titre, String auteur, int taken){
+		this.id = id;
 		this.titre = titre;
 		this.auteur = auteur;
+		this.taken = taken;
 	}
 	
 	@Override
@@ -20,16 +25,26 @@ public abstract class Doc implements Document {
 	public void retour() {
 	}
 
+	public int getId(){
+		return id;
+	}
+	
+	public int getTaken(){
+		return taken;
+	}
+	
 	@Override
 	public Object[] affiche() {
 		return  new Object[]{
 				titre,
-				auteur
+				auteur,
+				"taken",
+				taken
 		};
 	}
 
 	public String getType(){
-		return "Doc";
+		return "doc";
 	}
 
 	@Override

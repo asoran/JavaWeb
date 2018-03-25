@@ -2,20 +2,22 @@ package mediatheque;
 
 import java.util.List;
 
+import mdr.Doc;
+
 /**
- cette classe représente la mediatheque du point de vue du domaine
+ cette classe reprï¿½sente la mediatheque du point de vue du domaine
  cette classe est un singleton
- elle a un attribut qui fait le lien avec les données persistentes
+ elle a un attribut qui fait le lien avec les donnï¿½es persistentes
  
  LES SERVLETS DOIVENT S'ADRESSER A CETTE CLASSE EXCLUSIVEMENT
  POUR INTERROGER LES DONNEES
 
- beaucoup des méthodes de Mediatheque sont déléguées à l'attribut de persistance
- qui devra répercuter ces opérations sur les données persistantes
+ beaucoup des mï¿½thodes de Mediatheque sont dï¿½lï¿½guï¿½es ï¿½ l'attribut de persistance
+ qui devra rï¿½percuter ces opï¿½rations sur les donnï¿½es persistantes
 
 */
 public class Mediatheque {
-// Jean-François Brette 01/01/2018
+// Jean-Franï¿½ois Brette 01/01/2018
 
 // singleton standard ======================== 
 	static {
@@ -29,7 +31,7 @@ public class Mediatheque {
 	private Mediatheque () {}
 // fin - singleton standard ==================
 
-// lien avec les données persistantes +++++++++++++++
+// lien avec les donnï¿½es persistantes +++++++++++++++
 	private PersistentMediatheque data;
 
 	public PersistentMediatheque getData(){
@@ -39,39 +41,49 @@ public class Mediatheque {
 	public void setData(PersistentMediatheque data) {
 		if (this.data == null) this.data = data;
 	}
-// fin - lien avec les données persistantes +++++++++
+// fin - lien avec les donnï¿½es persistantes +++++++++
 
 // ********** action sur le document ***********************
 
-	// enregistre l'emprunt par l'abonné a du document d)
+	// enregistre l'emprunt par l'abonnï¿½ a du document d)
 
 	public void emprunt(Document d, Utilisateur a) throws EmpruntException {
-		d.emprunter(a);
+		if(isTaken(d)){
+			throw new EmpruntException();
+		}else{
+			d.emprunter(a); // Ne fait rien :)
+			data.emprunter(((Doc)d).getId(), a.getId());
+		}
 	}
 
+	public boolean isTaken(Document d){
+		return data.isTaken(((Doc)d).getId());
+	}
+	
 	//enregistre le retour du document d)
 
 	public void retour (Document d) {
-		d.retour();
+		d.retour(); // Ne fait rien :D
+		data.retour(((Doc)d).getId());
 	}
 
-// *********************** délégation **********************
+// *********************** dï¿½lï¿½gation **********************
 
-	// renvoie la liste de tous les documents de la bibliothèque
+	// renvoie la liste de tous les documents de la bibliothÃ¨que
 
 	public List<Document> tousLesDocuments() {
 		return data.tousLesDocuments();
 	}
 
 	// renvoie le user de login et passwd 
-	// si pas trouvé, renvoie null
+	// si pas trouvï¿½, renvoie null
 	
 	public Utilisateur getUser (String login, String password) {
 		return data.getUser(login, password);
 	}
 
-	// renvoie le document de numéro numDocument
-	// si pas trouvé, renvoie null
+	// renvoie le document de numï¿½ro numDocument
+	// si pas trouvï¿½, renvoie null
 
 	public Document getDocument(int numDocument) {
 		return data.getDocument(numDocument);

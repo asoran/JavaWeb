@@ -2,17 +2,11 @@ package mdr;
 
 public class Cd extends Doc {
 
-	public Cd(String titre, String auteur) {
-		super(titre, auteur);
+	public Cd(int id, String titre, String auteur, int taken) {
+		super(id, titre, auteur, taken);
 	}
 
-	@Override
-	public Object[] affiche() {
-		return  new Object[]{
-				titre,
-				auteur,
-		};
-	}
+	
 
 	@Override
 	public String getType(){
