@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  Dim 25 mars 2018 à 18:24
+-- Généré le :  Dim 25 mars 2018 à 23:49
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.1
 
@@ -30,19 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cd` (
   `idDocc` int(11) NOT NULL,
-  `dateParution` varchar(30) NOT NULL,
-  `editeur` varchar(30) NOT NULL,
-  `genre` varchar(30) NOT NULL
+  `longueur` int(20) NOT NULL,
+  `quality` varchar(30) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `cd`
 --
 
-INSERT INTO `cd` (`idDocc`, `dateParution`, `editeur`, `genre`) VALUES
-(1, '12/12/12', 'Quelquun', 'roman'),
-(2, '19/03/2018', 'Quelquun', 'Pigeon'),
-(3, 'cd', 'cd', 'cd');
+INSERT INTO `cd` (`idDocc`, `longueur`, `quality`) VALUES
+(1, 120, 'Blueray'),
+(2, 9330, 'DVD-Rip');
 
 -- --------------------------------------------------------
 
@@ -64,15 +62,12 @@ CREATE TABLE `docs` (
 --
 
 INSERT INTO `docs` (`idDoc`, `typeDoc`, `titre`, `auteur`, `taken`, `idRef`) VALUES
-(1, 1, 'Harry Potter', 'Altan', NULL, 1),
-(2, 1, ' Hernani', 'Altan', NULL, 2),
-(3, 2, 'The greatest showman', 'Altan', 5, 1),
+(1, 1, 'Harry Potter', 'Daouya', NULL, 1),
+(2, 1, 'Hermione', 'Altan', NULL, 2),
+(3, 2, 'The greatest showman', 'Daouya', NULL, 1),
 (4, 3, 'Le Labyrinthe', 'Altan', NULL, 1),
 (5, 2, 'La vie de Guillaume rourou', 'Altan', 5, 2),
-(9, 1, 'a', 'b', NULL, 11),
-(10, 1, 'Lol', 'mdr', NULL, 12),
-(11, 1, 'a', 'a', NULL, 13),
-(12, 2, 'cd', 'cd', NULL, 3);
+(6, 3, 'Test de PDF', 'Daouya', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -93,10 +88,7 @@ CREATE TABLE `livre` (
 
 INSERT INTO `livre` (`idDocc`, `dateParution`, `editeur`, `genre`) VALUES
 (1, '12/12/12', 'Quelquun', 'roman'),
-(2, '12/12/12', 'Quelquun', 'compte'),
-(11, 'c', 'd', 'e'),
-(12, 'xD', 'ptdr', 'Gallimard Jeunesse'),
-(13, 'a', 'a', 'autobiogrpahie');
+(2, '12/12/12', 'Quelquun', 'aventure');
 
 -- --------------------------------------------------------
 
@@ -106,17 +98,16 @@ INSERT INTO `livre` (`idDocc`, `dateParution`, `editeur`, `genre`) VALUES
 
 CREATE TABLE `pdf` (
   `idDocc` int(11) NOT NULL,
-  `dateParution` varchar(30) NOT NULL,
-  `editeur` varchar(30) NOT NULL,
-  `genre` varchar(30) NOT NULL
+  `taille` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `pdf`
 --
 
-INSERT INTO `pdf` (`idDocc`, `dateParution`, `editeur`, `genre`) VALUES
-(1, '12/12/12', 'Quelquun', 'roman');
+INSERT INTO `pdf` (`idDocc`, `taille`) VALUES
+(1, 12),
+(2, 322);
 
 -- --------------------------------------------------------
 
@@ -184,25 +175,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `cd`
 --
 ALTER TABLE `cd`
-  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `docs`
 --
 ALTER TABLE `docs`
-  MODIFY `idDoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idDoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `livre`
 --
 ALTER TABLE `livre`
-  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `pdf`
 --
 ALTER TABLE `pdf`
-  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDocc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `users`
